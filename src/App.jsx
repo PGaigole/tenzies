@@ -17,6 +17,10 @@ function App() {
     return Math.ceil(Math.random() * 6);
   }
 
+  function rollDice() {
+    setDice(initRandomDice());
+  }
+
   return (
     <main className="main-container">
       <section className="main-section">
@@ -31,7 +35,7 @@ function App() {
               <Die value={die} />
             ))}
           </section>
-          <button>Roll</button>
+          <button onClick={rollDice}>Roll</button>
         </section>
       </section>
     </main>
