@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Die from "./components/Die";
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
 
 function App() {
   //We are using 10 dice
@@ -54,11 +55,8 @@ function App() {
     if (allDiceValue && allDiceHeld) {
       setTenzies(true);
       setButtonText("New Game");
-      setFinalText("Won");
-    } else if (!allDiceValue && allDiceHeld) {
+    } else {
       setTenzies(false);
-      setButtonText("New Game");
-      setFinalText("Lose");
     }
   }
 
@@ -68,6 +66,7 @@ function App() {
 
   return (
     <main className="main-container">
+      {tenzies && <Confetti />}
       <section className="main-section">
         <h1>Tenzies</h1>
         <p>
@@ -87,7 +86,6 @@ function App() {
             ))}
           </section>
           <button onClick={rollDice}>{buttonText}</button>
-          <h3>{finalText && `You ${finalText}!`}</h3>
         </section>
       </section>
     </main>
