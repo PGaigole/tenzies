@@ -34,6 +34,7 @@ function App() {
       //reset the game
       setDice(initRandomDice(numberOfDice));
       setTenzies(false);
+      setButtonText("Roll");
     } else {
       setDice((oldDice) =>
         oldDice.map((die) => (die.isHeld ? die : generateDie()))
