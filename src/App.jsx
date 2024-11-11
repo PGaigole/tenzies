@@ -8,6 +8,8 @@ function App() {
   const numberOfDice = 10;
   const [dice, setDice] = React.useState(initRandomDice(numberOfDice));
   const [tenzies, setTenzies] = React.useState(false);
+  const [buttonText, setButtonText] = React.useState("Roll");
+  const [finalText, setFinalText] = React.useState("");
 
   function generateDie() {
     return {
@@ -51,6 +53,12 @@ function App() {
     const allDiceHeld = dice.every((die) => die.isHeld);
     if (allDiceValue && allDiceHeld) {
       setTenzies(true);
+      setButtonText("New Game");
+      setFinalText("Won");
+    } else if (!allDiceValue && allDiceHeld) {
+      setTenzies(false);
+      setButtonText("New Game");
+      setFinalText("Lose");
     }
   }
 
@@ -78,7 +86,8 @@ function App() {
               />
             ))}
           </section>
-          <button onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
+          <button onClick={rollDice}>{buttonText}</button>
+          <h3>{finalText && `You ${finalText}!`}</h3>
         </section>
       </section>
     </main>

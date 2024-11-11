@@ -35,6 +35,10 @@ h2 {
   text-align: center;
 }
 
+h3 {
+  padding: 20px;
+}
+
 p {
   font-size: 13.11px;
   font-weight: 400;
