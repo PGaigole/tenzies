@@ -55,7 +55,3 @@ button {
   text-align: center;
   cursor: pointer;
 }
-
-button:active {
-  background-color: #59e391;
-}

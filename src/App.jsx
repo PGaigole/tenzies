@@ -1,15 +1,19 @@
 import React from "react";
 import "./App.css";
 import Die from "./components/Die";
+import { nanoid } from "nanoid";
 
 function App() {
-  const [dice, setDice] = React.useState(initRandomDice());
+  //We are using 10 dice
+  const numberOfDice = 10;
+  const [dice, setDice] = React.useState(initRandomDice(numberOfDice));
 
-  function initRandomDice() {
-    //We are using 10 dice
-    const allDice = new Array(10);
-    allDice.fill(0);
-    return allDice.map(() => generateRandomNumber());
+  function initRandomDice(n) {
+    return Array.from({ length: n }, () => ({
+      value: generateRandomNumber(),
+      isHeld: false,
+      id: nanoid(),
+    }));
   }
 
   function generateRandomNumber() {
@@ -18,7 +22,15 @@ function App() {
   }
 
   function rollDice() {
-    setDice(initRandomDice());
+    setDice(initRandomDice(numberOfDice));
+  }
+
+  function holdDie(id) {
+    //based on id of the id, we need to hold the die
+    const holdDie = dice.map((die) => {
+      return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
+    });
+    return setDice(holdDie);
   }
 
   return (
@@ -32,7 +44,13 @@ function App() {
         <section className="dice-main-container">
           <section className="dice-container">
             {dice.map((die) => (
-              <Die value={die} />
+              <Die
+                key={die.id}
+                value={die.value}
+                isHeld={die.isHeld}
+                id={die.id}
+                click={holdDie}
+              />
             ))}
           </section>
           <button onClick={rollDice}>Roll</button>

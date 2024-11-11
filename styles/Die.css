@@ -9,3 +9,7 @@
   background-color: #fff;
   cursor: pointer;
 }
+
+.die-container:active {
+  background-color: #59e391;
+}
