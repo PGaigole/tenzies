@@ -7,6 +7,7 @@ function App() {
   //We are using 10 dice
   const numberOfDice = 10;
   const [dice, setDice] = React.useState(initRandomDice(numberOfDice));
+  const [tenzies, setTenzies] = React.useState(false);
 
   function generateDie() {
     return {
@@ -26,9 +27,15 @@ function App() {
   }
 
   function rollDice() {
-    setDice((oldDice) =>
-      oldDice.map((die) => (die.isHeld ? die : generateDie()))
-    );
+    if (tenzies) {
+      //reset the game
+      setDice(initRandomDice(numberOfDice));
+      setTenzies(false);
+    } else {
+      setDice((oldDice) =>
+        oldDice.map((die) => (die.isHeld ? die : generateDie()))
+      );
+    }
   }
 
   function holdDie(id) {
@@ -38,6 +45,18 @@ function App() {
     });
     setDice(holdDie);
   }
+
+  function endGame() {
+    const allDiceValue = dice.every((die) => die.value === dice[0].value);
+    const allDiceHeld = dice.every((die) => die.isHeld);
+    if (allDiceValue && allDiceHeld) {
+      setTenzies(true);
+    }
+  }
+
+  React.useEffect(() => {
+    endGame();
+  }, [dice]);
 
   return (
     <main className="main-container">
@@ -59,7 +78,7 @@ function App() {
               />
             ))}
           </section>
-          <button onClick={rollDice}>Roll</button>
+          <button onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
         </section>
       </section>
     </main>
