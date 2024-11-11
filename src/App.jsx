@@ -1,10 +1,22 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import React from "react";
 import "./App.css";
 import Die from "./components/Die";
 
 function App() {
+  const [dice, setDice] = React.useState(initRandomDice());
+
+  function initRandomDice() {
+    //We are using 10 dice
+    const allDice = new Array(10);
+    allDice.fill(0);
+    return allDice.map(() => generateRandomNumber());
+  }
+
+  function generateRandomNumber() {
+    //Generate random number between 1 to 6
+    return Math.ceil(Math.random() * 6);
+  }
+
   return (
     <main className="main-container">
       <section className="main-section">
@@ -15,16 +27,9 @@ function App() {
         </p>
         <section className="dice-main-container">
           <section className="dice-container">
-            <Die value="1" />
-            <Die value="1" />
-            <Die value="1" />
-            <Die value="1" />
-            <Die value="1" />
-            <Die value="1" />
-            <Die value="1" />
-            <Die value="1" />
-            <Die value="1" />
-            <Die value="1" />
+            {dice.map((die) => (
+              <Die value={die} />
+            ))}
           </section>
           <button>Roll</button>
         </section>
