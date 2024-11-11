@@ -8,12 +8,16 @@ function App() {
   const numberOfDice = 10;
   const [dice, setDice] = React.useState(initRandomDice(numberOfDice));
 
-  function initRandomDice(n) {
-    return Array.from({ length: n }, () => ({
+  function generateDie() {
+    return {
       value: generateRandomNumber(),
       isHeld: false,
       id: nanoid(),
-    }));
+    };
+  }
+
+  function initRandomDice(n) {
+    return Array.from({ length: n }, () => generateDie());
   }
 
   function generateRandomNumber() {
@@ -22,7 +26,9 @@ function App() {
   }
 
   function rollDice() {
-    setDice(initRandomDice(numberOfDice));
+    setDice((oldDice) =>
+      oldDice.map((die) => (die.isHeld ? die : generateDie()))
+    );
   }
 
   function holdDie(id) {
@@ -30,7 +36,7 @@ function App() {
     const holdDie = dice.map((die) => {
       return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
     });
-    return setDice(holdDie);
+    setDice(holdDie);
   }
 
   return (
