@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../../styles/Timer.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 export default function Timer() {
   const [seconds, setSeconds] = useState(0);
@@ -23,6 +25,7 @@ export default function Timer() {
   return (
     <section className="timer-section">
       <h3>
+        <FontAwesomeIcon icon={faClock} className="fa-icon" />
         {minutes < 10 ? `0${minutes}` : minutes}:
         {seconds < 10 ? `0${seconds}` : seconds}
       </h3>

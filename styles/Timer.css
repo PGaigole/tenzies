@@ -2,3 +2,7 @@
   color: #fff;
   text-align: right;
 }
+
+.timer-section .fa-icon {
+  margin-right: 10px;
+}
