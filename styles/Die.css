@@ -3,13 +3,68 @@
   height: 35.84px;
   border-radius: 3.81px 0px 0px 0px;
   box-shadow: 0px 2px 2px 0px #00000026;
-  display: flex;
-  justify-content: center;
+  display: grid;
   align-items: center;
+  justify-items: center;
   background-color: #fff;
   cursor: pointer;
 }
 
 .die-container:active {
   background-color: #59e391;
+}
+
+.die-container .dot {
+  width: 5px;
+  height: 5px;
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.die-container[data-value="2"] {
+  grid-template: auto auto/repeat(2, 1fr);
+}
+.die-container[data-value="2"] .dot:nth-child(2) {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.die-container[data-value="3"] {
+  grid-template: auto auto auto/repeat(3, 1fr);
+}
+.die-container[data-value="3"] .dot:nth-child(2) {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+.die-container[data-value="3"] .dot:nth-child(3) {
+  grid-column: 3/4;
+  grid-row: 3/4;
+}
+
+.die-container[data-value="4"] {
+  grid-template: auto auto/repeat(2, 1fr);
+}
+
+.die-container[data-value="5"] {
+  grid-template: auto auto auto/repeat(3, 1fr);
+}
+.die-container[data-value="5"] .dot:nth-child(2) {
+  grid-column: 3/4;
+  grid-row: 3/4;
+}
+.die-container[data-value="5"] .dot:nth-child(3) {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+.die-container[data-value="5"] .dot:nth-child(4) {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+.die-container[data-value="5"] .dot:nth-child(5) {
+  grid-column: 3/4;
+  grid-row: 1/2;
+}
+
+.die-container[data-value="6"] {
+  grid-template: auto auto auto/repeat(2, 1fr);
 }
