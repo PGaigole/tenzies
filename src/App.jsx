@@ -15,6 +15,8 @@ function App() {
   const [timerActive, setTimerActive] = React.useState(true);
   const [newGame, setNewGame] = React.useState(true);
   const [rolls, setRolls] = React.useState(0);
+  const [minutes, setMinutes] = React.useState(0);
+  const [seconds, setSeconds] = React.useState(0);
 
   function generateDie() {
     return {
@@ -66,9 +68,15 @@ function App() {
       setTenzies(true);
       setButtonText("New Game");
       setTimerActive(false);
+      console.log(rolls);
     } else {
       setTenzies(false);
     }
+  }
+
+  function handleTimeChange(minutes, seconds) {
+    setMinutes(minutes);
+    setSeconds(seconds);
   }
 
   React.useEffect(() => {
@@ -79,7 +87,13 @@ function App() {
     <main className="main-container">
       <section className="main-header">
         <Rolls howMany={rolls} />
-        <Timer isActive={timerActive} isNewGame={newGame} />
+        <Timer
+          isActive={timerActive}
+          isNewGame={newGame}
+          onTimeChange={handleTimeChange}
+          minutes={minutes}
+          seconds={seconds}
+        />
       </section>
       {tenzies && <Confetti />}
       <section className="main-section">

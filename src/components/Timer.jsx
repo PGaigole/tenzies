@@ -3,15 +3,17 @@ import "../../styles/Timer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 
-export default function Timer({ isActive, isNewGame }) {
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-
+export default function Timer({
+  isActive,
+  isNewGame,
+  onTimeChange,
+  minutes,
+  seconds,
+}) {
   useEffect(() => {
     //To track if it's a new game
     if (isNewGame) {
-      setMinutes(0);
-      setSeconds(0);
+      onTimeChange(0, 0);
     }
   }, [isNewGame]);
 
@@ -19,22 +21,14 @@ export default function Timer({ isActive, isNewGame }) {
     //To track seconds
     if (isActive) {
       const interval = setInterval(() => {
-        setSeconds((prevSeconds) => (prevSeconds === 59 ? 0 : prevSeconds + 1));
+        seconds === 59
+          ? onTimeChange(minutes + 1, seconds)
+          : onTimeChange(minutes, seconds + 1);
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [isActive]);
-
-  useEffect(() => {
-    //To track minutes
-    if (isActive) {
-      const interval = setInterval(() => {
-        setMinutes((prevMinutes) => prevMinutes + 1);
-      }, 60000);
-      return () => clearInterval(interval);
-    }
-  }, [isActive]);
+  }, [isActive, onTimeChange, minutes, seconds]);
 
   return (
     <section className="timer-section">
