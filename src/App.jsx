@@ -3,6 +3,7 @@ import "./App.css";
 import Die from "./components/Die";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
+import Timer from "./components/Timer";
 
 function App() {
   //We are using 10 dice
@@ -10,7 +11,6 @@ function App() {
   const [dice, setDice] = React.useState(initRandomDice(numberOfDice));
   const [tenzies, setTenzies] = React.useState(false);
   const [buttonText, setButtonText] = React.useState("Roll");
-  const [finalText, setFinalText] = React.useState("");
 
   function generateDie() {
     return {
@@ -67,6 +67,7 @@ function App() {
 
   return (
     <main className="main-container">
+      <Timer />
       {tenzies && <Confetti />}
       <section className="main-section">
         <h1>Tenzies</h1>
