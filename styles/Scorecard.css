@@ -1,4 +1,13 @@
 .scorecard-section {
   color: #fff;
-  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  height: 25vh;
+}
+
+.scorecard-section {
+  td {
+    text-align: center;
+  }
 }
