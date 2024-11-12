@@ -69,7 +69,6 @@ function App() {
       setTenzies(true);
       setButtonText("New Game");
       setTimerActive(false);
-      console.log(rolls);
     } else {
       setTenzies(false);
     }
@@ -118,7 +117,7 @@ function App() {
           <button onClick={rollDice}>{buttonText}</button>
         </section>
       </section>
-      <ScoreCard />
+      {tenzies && <ScoreCard info={{ rolls, minutes, seconds }} />}
     </main>
   );
 }
