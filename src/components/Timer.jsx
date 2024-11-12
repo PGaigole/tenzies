@@ -21,14 +21,19 @@ export default function Timer({
     //To track seconds
     if (isActive) {
       const interval = setInterval(() => {
-        seconds === 59
-          ? onTimeChange(minutes + 1, seconds)
-          : onTimeChange(minutes, seconds + 1);
+        if (seconds === 59) {
+          onTimeChange((mins) => mins + 1, 0);
+        } else {
+          onTimeChange(
+            (mins) => mins,
+            (secs) => secs + 1
+          );
+        }
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [isActive, onTimeChange, minutes, seconds]);
+  }, [isActive, minutes, seconds]);
 
   return (
     <section className="timer-section">

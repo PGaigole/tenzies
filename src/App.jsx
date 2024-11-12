@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import Timer from "./components/Timer";
 import Rolls from "./components/Rolls";
+import ScoreCard from "./components/ScoreCard";
 
 function App() {
   //We are using 10 dice
@@ -117,6 +118,7 @@ function App() {
           <button onClick={rollDice}>{buttonText}</button>
         </section>
       </section>
+      <ScoreCard />
     </main>
   );
 }
