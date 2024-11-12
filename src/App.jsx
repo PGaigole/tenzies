@@ -14,6 +14,7 @@ function App() {
   const [buttonText, setButtonText] = React.useState("Roll");
   const [timerActive, setTimerActive] = React.useState(true);
   const [newGame, setNewGame] = React.useState(true);
+  const [rolls, setRolls] = React.useState(0);
 
   function generateDie() {
     return {
@@ -40,11 +41,13 @@ function App() {
       setButtonText("Roll");
       setTimerActive(true);
       setNewGame(true);
+      setRolls(0);
     } else {
       setDice((oldDice) =>
         oldDice.map((die) => (die.isHeld ? die : generateDie()))
       );
       setNewGame(false);
+      setRolls((previousValue) => previousValue + 1);
     }
   }
 
@@ -75,7 +78,7 @@ function App() {
   return (
     <main className="main-container">
       <section className="main-header">
-        <Rolls />
+        <Rolls howMany={rolls} />
         <Timer isActive={timerActive} isNewGame={newGame} />
       </section>
       {tenzies && <Confetti />}
