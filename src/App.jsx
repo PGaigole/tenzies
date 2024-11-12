@@ -11,6 +11,8 @@ function App() {
   const [dice, setDice] = React.useState(initRandomDice(numberOfDice));
   const [tenzies, setTenzies] = React.useState(false);
   const [buttonText, setButtonText] = React.useState("Roll");
+  const [timerActive, setTimerActive] = React.useState(true);
+  const [newGame, setNewGame] = React.useState(true);
 
   function generateDie() {
     return {
@@ -35,10 +37,13 @@ function App() {
       setDice(initRandomDice(numberOfDice));
       setTenzies(false);
       setButtonText("Roll");
+      setTimerActive(true);
+      setNewGame(true);
     } else {
       setDice((oldDice) =>
         oldDice.map((die) => (die.isHeld ? die : generateDie()))
       );
+      setNewGame(false);
     }
   }
 
@@ -56,6 +61,7 @@ function App() {
     if (allDiceValue && allDiceHeld) {
       setTenzies(true);
       setButtonText("New Game");
+      setTimerActive(false);
     } else {
       setTenzies(false);
     }
@@ -67,7 +73,7 @@ function App() {
 
   return (
     <main className="main-container">
-      <Timer />
+      <Timer isActive={timerActive} isNewGame={newGame} />
       {tenzies && <Confetti />}
       <section className="main-section">
         <h1>Tenzies</h1>
