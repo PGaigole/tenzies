@@ -12,6 +12,15 @@ export default function ScoreCard({ info }) {
     return savedScores ? JSON.parse(savedScores) : [];
   }
 
+  function sortScores() {
+    return scores.sort((a, b) => {
+      if (a.minutes === b.minutes) {
+        return a.seconds - b.seconds;
+      }
+      return a.minutes - b.minutes;
+    });
+  }
+
   useEffect(() => {
     const scoreExists = scores.some((score) => score.id === info.id);
 
@@ -32,7 +41,7 @@ export default function ScoreCard({ info }) {
           </tr>
         </thead>
         <tbody>
-          {scores.map((score, index) => (
+          {sortScores().map((score, index) => (
             <tr key={index}>
               <td>{score.rolls}</td>
               <td>
