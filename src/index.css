@@ -59,3 +59,8 @@ button {
   text-align: center;
   cursor: pointer;
 }
+
+label,
+span {
+  font-weight: 700;
+}

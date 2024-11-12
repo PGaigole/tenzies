@@ -4,6 +4,7 @@ import Die from "./components/Die";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import Timer from "./components/Timer";
+import Rolls from "./components/Rolls";
 
 function App() {
   //We are using 10 dice
@@ -73,7 +74,10 @@ function App() {
 
   return (
     <main className="main-container">
-      <Timer isActive={timerActive} isNewGame={newGame} />
+      <section className="main-header">
+        <Rolls />
+        <Timer isActive={timerActive} isNewGame={newGame} />
+      </section>
       {tenzies && <Confetti />}
       <section className="main-section">
         <h1>Tenzies</h1>
