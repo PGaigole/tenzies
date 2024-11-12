@@ -117,7 +117,9 @@ function App() {
           <button onClick={rollDice}>{buttonText}</button>
         </section>
       </section>
-      {tenzies && <ScoreCard info={{ rolls, minutes, seconds }} />}
+      {tenzies && (
+        <ScoreCard info={{ rolls, minutes, seconds, id: nanoid() }} />
+      )}
     </main>
   );
 }
